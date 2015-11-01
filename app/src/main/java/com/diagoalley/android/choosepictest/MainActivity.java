@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 //                intent.putExtra("return-data",false);
 //                intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
 //                intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-                startActivityForResult(intent,SELECT_PHOTO);
+                startActivityForResult(intent,TAKE_PHOTO);
             }
         });
         takePhoto.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode){
             case TAKE_PHOTO:
                 if(resultCode == RESULT_OK){
+                    if(data!=null)
+                        imageUri = data.getData();
                     Intent intent = new Intent("com.android.camera.action.CROP");
                     intent.setDataAndType(imageUri,"image/*");
 //                    intent.putExtra("crop",true);
